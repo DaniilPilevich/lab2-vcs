@@ -22,3 +22,10 @@ build.log
 Thumbs.db
 .idea/
 *.swp
+
+## Lab reports / staging (not part of source)
+_lab2_staging/
+*.docx
+*.pdf
+ИППРПО.*
+Лаба*
