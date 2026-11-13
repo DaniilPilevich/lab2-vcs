@@ -8,3 +8,12 @@
 ## Описание
 Проект демонстрирует слабую связность через интерфейсы.
 Система отправки уведомлений (вариант 7): INotifier, NotificationService, SMS/Email/Push/Telegram.
+
+## Установка
+
+```bash
+dotnet restore
+dotnet build
+dotnet run --project NotificationSystem/NotificationSystem.csproj
+dotnet test
+```
