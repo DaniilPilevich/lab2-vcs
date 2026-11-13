@@ -1,8 +1,9 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NotificationSystem.Abstractions;
 using NotificationSystem.Models;
 using NotificationSystem.Notifiers;
 using NotificationSystem.Services;
+using NotificationSystem.Logging;
 using NotificationSystem.Validation;
 using Serilog;
 
@@ -16,6 +17,8 @@ internal static class Program
             .WriteTo.Console()
             .WriteTo.File("logs/app.log")
             .CreateLogger();
+
+        AppLogger.Info("Приложение запущено (feature/add-logging)");
 
         try
         {
@@ -75,3 +78,4 @@ internal static class Program
         }
     }
 }
+
