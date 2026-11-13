@@ -1,0 +1,69 @@
+@startuml Lab1_Variant7_Notifications
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam linetype ortho
+left to right direction
+
+interface INotifier {
+  + Send(user: User, message: string): void
+}
+
+class User {
+  + Id: int
+  + Name: string
+  + Email: string
+  + Phone: string
+}
+
+class NotificationService {
+  - _notifiers: List<INotifier>
+  + NotificationService(notifiers: List<INotifier>)
+  + Notify(user: User, message: string): void
+  
+}
+
+class SmsNotifier {
+  - _apiGateway: string
+  + SmsNotifier(apiGateway: string)
+  + Send(user: User, message: string): void
+}
+
+class EmailNotifier {
+  - _smtpServer: string
+  + EmailNotifier(smtpServer: string)
+  + Send(user: User, message: string): void
+}
+
+class PushNotifier {
+  - _firebaseKey: string
+  + PushNotifier(firebaseKey: string)
+  + Send(user: User, message: string): void
+}
+
+class TelegramNotifier {
+  - _botToken: string
+  + TelegramNotifier(botToken: string)
+  + Send(user: User, message: string): void
+}
+
+NotificationService --> INotifier : depends on
+SmsNotifier ..|> INotifier
+EmailNotifier ..|> INotifier
+PushNotifier ..|> INotifier
+TelegramNotifier ..|> INotifier
+
+NotificationService ..> User : uses
+INotifier ..> User : uses
+
+note right of INotifier
+  Центр сетевой структуры.
+  Основной модуль зависит
+  только от абстракции (DIP).
+end note
+
+note bottom of TelegramNotifier
+  Добавлен без изменения
+  NotificationService (OCP).
+end note
+
+@enduml
